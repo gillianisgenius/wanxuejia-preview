@@ -310,3 +310,4 @@ aside .panel:first-child { border-top: 3px solid rgb(150, 183, 121); }
   .stop .ctl { grid-column: 1 / -1; justify-content: flex-end; }
   .trip-drive { padding-left: 78px; }
 }
+.locate { border: 0px; background: none; padding: 3px 2px; color: rgb(40, 116, 94); border-bottom: 1px dashed rgb(144, 172, 112); font-size: 13px; }

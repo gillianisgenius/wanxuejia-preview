@@ -9,10 +9,10 @@
 <div class="shared-banner" id="sharedBanner">這是朋友分享給你的行程（只能看）。<a href="#" id="copyMine">複製一份到我的行程</a>，就可以自己改。</div>
 <section class="panel" id="plan"><div class="tools"><button id="mapAll">開 Google 地圖整條路線</button><button id="share">用 LINE 分享</button><button id="cal">加入 Google 行事曆</button></div>
 <h2>時間表</h2>
-<div class="trip-bar"><label for="day">哪一天 <select id="day"></select></label><label for="dep">幾點出發 <select id="dep"></select></label></div>
+<div class="trip-bar"><label for="origin">從哪裡出發 <select id="origin"></select></label><button type="button" id="locate" class="locate">用目前位置</button><label for="day">哪一天 <select id="day"></select></label><label for="dep">幾點出發 <select id="dep"></select></label></div>
 <div class="wx" id="wx"></div>
 <div class="stops" id="stops"></div>
-<p class="source-label">車程是不塞車時間 × 1.15，假日下午 3 點到 7 點再乘 1.3，不是即時路況。每站停留時間可以自己改。</p>
+<p class="source-label">出發地只記到「區」，存在你自己的瀏覽器，不會送出。車程是不塞車時間 × 1.15，假日下午 3 點到 7 點再乘 1.3，不是即時路況。每站停留時間可以自己改。</p>
 <div class="note"><img src="assets/frog.webp" alt="青蛙提醒"><div><h3>排行程的小提醒</h3><p>中間留一段吃飯和休息，孩子和長輩都比較不累。戶外的點排在上午，下午容易變天或塞車。</p></div></div></section>
 </div>
 <aside><section class="panel"><h3>這趟行程</h3><div class="official">出發 <b id="sDep">—</b></div><div class="official">回到家 <b id="sBack">—</b></div><div class="official">開車合計 <b id="sDrive">—</b></div><div class="official">停留地點 <b id="sCount">—</b></div><button class="button" id="mapAll2" style="width:100%">開 Google 地圖導航</button><button class="button" id="copyLink" style="width:100%;background:#eef3e9;color:#497346">複製分享連結</button><p class="source-label">朋友打開連結看到的是唯讀版本，不需要註冊。</p></section>
@@ -23,32 +23,40 @@
 <script>
 function toast(t){var e=document.querySelector('.toast');e.textContent=t;e.style.display='block';setTimeout(function(){e.style.display='none'},3500)}
 var SP={
- home:{n:'台北・劍潭（出發地）',q:'劍潭捷運站'},
+ home:{n:'',q:''},
  sea:{n:'海科館主題館',d:'海洋劇場、兒童廳，室內',stay:135,closed:[1],q:'國立海洋科技博物館'},
  lunch:{n:'八斗子漁港午餐',d:'海鮮、碧砂漁港',stay:75,lunch:1,q:'八斗子漁港'},
  chao:{n:'潮境公園',d:'海邊大草坡，戶外',stay:60,out:1,q:'潮境公園'},
  dap:{n:'大坪海岸潮間帶',d:'退潮前後找螃蟹，戶外',stay:45,out:1,q:'大坪海岸'},
  zhb:{n:'正濱漁港',d:'彩色屋拍照，戶外',stay:40,out:1,q:'正濱漁港'},
  hp:{n:'和平島地質公園',d:'海蝕地形步道，戶外',stay:90,out:1,q:'和平島地質公園'}};
+// 出發地只到「區」：區中心座標，車程用直線距離估（正式版改成事先用 OSRM 算好每區到每個景點的表）
+var OR=[['tp-zz','臺北市中正區',25.032,121.519],['tp-da','臺北市大安區',25.026,121.543],['tp-xy','臺北市信義區',25.033,121.567],['tp-zs','臺北市中山區',25.064,121.533],['tp-ss','臺北市松山區',25.050,121.577],['tp-dt','臺北市大同區',25.063,121.513],['tp-wh','臺北市萬華區',25.028,121.497],['tp-ws','臺北市文山區',24.989,121.570],['tp-ng','臺北市南港區',25.038,121.607],['tp-nh','臺北市內湖區',25.083,121.589],['tp-sl','臺北市士林區',25.093,121.525],['tp-bt','臺北市北投區',25.132,121.501],
+ ['ntp-bq','新北市板橋區',25.011,121.462],['ntp-xz','新北市新莊區',25.036,121.450],['ntp-zh','新北市中和區',24.999,121.499],['ntp-yh','新北市永和區',25.008,121.516],['ntp-sc','新北市三重區',25.062,121.488],['ntp-xd','新北市新店區',24.968,121.538],['ntp-tc','新北市土城區',24.972,121.444],['ntp-xzh','新北市汐止區',25.063,121.661],['ntp-ds','新北市淡水區',25.169,121.441],['ntp-lk','新北市林口區',25.077,121.391],['ntp-lz','新北市蘆洲區',25.085,121.474],['ntp-sl','新北市樹林區',24.991,121.420],
+ ['kl','基隆市',25.128,121.742],['ty-ty','桃園市桃園區',24.993,121.301],['ty-zl','桃園市中壢區',24.965,121.225],['ty-gs','桃園市龜山區',25.019,121.346],['ty-bd','桃園市八德區',24.953,121.298]];
+var LL={sea:[25.137,121.799],lunch:[25.144,121.792],chao:[25.143,121.806],dap:[25.140,121.810],zhb:[25.152,121.774],hp:[25.161,121.764]};
+function orig(code){return OR.filter(function(o){return o[0]===code})[0]||OR[0]}
+function km(a,b){var R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dg=(b[1]-a[1])*r,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dg/2)*Math.sin(dg/2);return 2*R*Math.asin(Math.sqrt(x))}
+function fromHome(id){var o=orig(state.origin);return Math.max(8,Math.round(km([o[2],o[3]],LL[id])*1.35))}
 var DM={'home|sea':38,'home|lunch':38,'home|chao':40,'home|dap':40,'home|zhb':33,'home|hp':34,'sea|chao':4,'sea|lunch':4,'sea|dap':5,'sea|zhb':10,'sea|hp':11,'chao|lunch':5,'chao|dap':3,'chao|zhb':12,'chao|hp':13,'dap|lunch':5,'lunch|zhb':9,'hp|lunch':10,'dap|zhb':12,'dap|hp':13,'hp|zhb':5};
 var DAYS=[{v:'2026-10-24',l:'10/24（六）',wx:'陰短暫雨・22–26°',p:70},{v:'2026-10-25',l:'10/25（日）',wx:'多雲・23–28°',p:20},{v:'2026-10-26',l:'10/26（一）',wx:'晴・24–29°',p:10}];
 var WD='日一二三四五六';
-function base(a,b){return DM[a+'|'+b]||DM[b+'|'+a]||15}
+function base(a,b){if(a==='home')return fromHome(b);if(b==='home')return fromHome(a);return DM[a+'|'+b]||DM[b+'|'+a]||15}
 function dayOf(v){return DAYS.filter(function(d){return d.v===v})[0]||DAYS[0]}
 function dow(v){return new Date(v+'T12:00:00').getDay()}
 function drive(a,b,t,v){var f=1.15,w=dow(v);if((w===0||w===6)&&t>=900&&t<1140)f*=1.3;return Math.round(base(a,b)*f)}
 function hm(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
 function hmToMin(s){var p=s.split(':');return +p[0]*60+ +p[1]}
 var KEY='wxj-mytrip',state=null,readonly=false;
-function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.stops)return s}catch(e){}return {day:'2026-10-24',dep:'09:00',stops:[{id:'sea',stay:135},{id:'lunch',stay:75},{id:'chao',stay:60}]}}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.stops)return s}catch(e){}return {origin:'',geo:false,day:'2026-10-24',dep:'09:00',stops:[{id:'sea',stay:135},{id:'lunch',stay:75},{id:'chao',stay:60}]}}
 function save(){if(readonly)return;try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function fromUrl(){var q=new URLSearchParams(location.search);if(!q.get('s'))return null;var st=q.get('s').split(',').map(function(x){var p=x.split('.');return {id:p[0],stay:+p[1]||(SP[p[0]]||{}).stay||60}}).filter(function(x){return SP[x.id]&&x.id!=='home'});return {day:q.get('d')||DAYS[0].v,dep:q.get('t')||'09:00',stops:st}}
-function shareUrl(){var u=location.href.split('?')[0].split('#')[0];return u+'?s='+state.stops.map(function(s){return s.id+'.'+s.stay}).join(',')+'&d='+state.day+'&t='+state.dep}
+function fromUrl(){var q=new URLSearchParams(location.search);if(!q.get('s'))return null;var st=q.get('s').split(',').map(function(x){var p=x.split('.');return {id:p[0],stay:+p[1]||(SP[p[0]]||{}).stay||60}}).filter(function(x){return SP[x.id]&&x.id!=='home'});return {origin:q.get('o')||'',geo:false,day:q.get('d')||DAYS[0].v,dep:q.get('t')||'09:00',stops:st}}
+function shareUrl(){var u=location.href.split('?')[0].split('#')[0];return u+'?s='+state.stops.map(function(s){return s.id+'.'+s.stay}).join(',')+'&d='+state.day+'&t='+state.dep+(state.origin?'&o='+state.origin:'')}
 function compute(){var v=state.day,t=hmToMin(state.dep),prev='home',rows=[],tot=0;
- rows.push({home:1,t:t,n:SP.home.n,d:'出發'});
+ var on=state.origin?orig(state.origin)[1]:'台北車站附近';rows.push({home:1,t:t,n:(state.geo?'目前位置附近（'+on+'）':on),d:state.origin?'出發':'還沒選出發地，先用台北車站估；請在上面選你住的區'});
  state.stops.forEach(function(s,i){var dm=drive(prev,s.id,t,v);tot+=dm;t+=dm;rows.push({drive:dm});rows.push({i:i,id:s.id,t:t,stay:s.stay});t+=s.stay;prev=s.id});
  if(state.stops.length){var dm=drive(prev,'home',t,v);tot+=dm;t+=dm;rows.push({drive:dm})}
- rows.push({home:1,t:t,n:'回到台北',d:'週日傍晚國道容易塞，早點出發'});return {rows:rows,back:t,tot:tot}}
+ rows.push({home:1,t:t,n:'回到家',d:'假日傍晚國道容易塞，早點出發'});return {rows:rows,back:t,tot:tot}}
 function render(){var day=dayOf(state.day),w=dow(state.day),c=compute(),h='';
  document.getElementById('wx').innerHTML='<div class="'+(day.p>=60?'rain':'')+'"><span>'+day.l+' 基隆中正區</span><strong>'+day.wx+'・降雨 '+day.p+'%</strong></div><div><span>這天</span><strong>'+(w===1?'週一，海科館等場館多半休館':(w===0||w===6?'假日，下午回程會塞':'平日'))+'</strong></div><small>氣象署鄉鎮預報（示意）。降雨 60% 以上，戶外的站會提醒你。</small>';
  c.rows.forEach(function(r){
@@ -75,18 +83,21 @@ document.getElementById('stops').addEventListener('dragover',function(e){var s=e
 document.getElementById('stops').addEventListener('drop',function(e){var s=e.target.closest('.stop[data-i]');if(!s||dragI===null)return;e.preventDefault();var j=+s.dataset.i;var i=dragI;dragI=null;move(i,j)});
 document.getElementById('stops').addEventListener('dragend',function(){dragI=null;document.querySelectorAll('.stop.over,.stop.dragging').forEach(function(x){x.classList.remove('over','dragging')})});
 document.getElementById('pickList').addEventListener('click',function(e){var b=e.target.closest('button[data-add]');if(!b||b.disabled)return;var k=b.dataset.add;state.stops.push({id:k,stay:SP[k].stay});render();toast('已加入「'+SP[k].n+'」')});
+var oSel=document.getElementById('origin');oSel.add(new Option('選你住的區',''));OR.forEach(function(o){oSel.add(new Option(o[1],o[0]))});
+oSel.onchange=function(){state.origin=oSel.value;state.geo=false;render()};
+document.getElementById('locate').onclick=function(){if(!navigator.geolocation){toast('這個瀏覽器不能定位，請直接選區');return}navigator.geolocation.getCurrentPosition(function(p){var me=[p.coords.latitude,p.coords.longitude],best=OR[0],bd=1e9;OR.forEach(function(o){var d=km(me,[o[2],o[3]]);if(d<bd){bd=d;best=o}});state.origin=best[0];state.geo=true;oSel.value=best[0];render();toast('已用目前位置，最近的是'+best[1]+'（只記到區）')},function(){toast('沒有取得位置，請直接選區')},{timeout:8000,maximumAge:600000})};
 var daySel=document.getElementById('day'),depSel=document.getElementById('dep');
 DAYS.forEach(function(d){daySel.add(new Option(d.l,d.v))});['07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','13:00'].forEach(function(t){depSel.add(new Option(t,t))});
 daySel.onchange=function(){state.day=daySel.value;render()};depSel.onchange=function(){state.dep=depSel.value;render()};
-function mapsUrl(){var pts=state.stops.map(function(s){return SP[s.id].q});if(!pts.length)return 'https://www.google.com/maps';var u='https://www.google.com/maps/dir/?api=1&travelmode=driving&origin='+encodeURIComponent(SP.home.q)+'&destination='+encodeURIComponent(pts[pts.length-1]);if(pts.length>1)u+='&waypoints='+encodeURIComponent(pts.slice(0,-1).join('|'));return u}
+function mapsUrl(){var pts=state.stops.map(function(s){return SP[s.id].q});if(!pts.length)return 'https://www.google.com/maps';var u='https://www.google.com/maps/dir/?api=1&travelmode=driving'+(state.geo||!state.origin?'':'&origin='+encodeURIComponent(orig(state.origin)[1]))+'&destination='+encodeURIComponent(pts[pts.length-1]);if(pts.length>1)u+='&waypoints='+encodeURIComponent(pts.slice(0,-1).join('|'));return u}
 ['mapAll','mapAll2'].forEach(function(id){document.getElementById(id).onclick=function(){window.open(mapsUrl(),'_blank','noopener')}});
-function shareText(){var c=compute(),day=dayOf(state.day),L=['玩學家行程：'+day.l+' '+state.dep+' 從台北出發'];c.rows.forEach(function(r){if(r.id)L.push(hm(r.t)+' '+SP[r.id].n)});L.push(hm(c.back)+' 回到台北');L.push('天氣：'+day.wx+'，降雨 '+day.p+'%');L.push('看完整時間表：'+shareUrl());return L.join('\n')}
+function shareText(){var c=compute(),day=dayOf(state.day),L=['玩學家行程：'+day.l+' '+state.dep+' 出發'+(state.origin?'（從'+orig(state.origin)[1]+'）':'')];c.rows.forEach(function(r){if(r.id)L.push(hm(r.t)+' '+SP[r.id].n)});L.push(hm(c.back)+' 回到家');L.push('天氣：'+day.wx+'，降雨 '+day.p+'%');L.push('看完整時間表：'+shareUrl());return L.join('\n')}
 document.getElementById('share').onclick=function(){window.open('https://line.me/R/share?text='+encodeURIComponent(shareText()),'_blank','noopener')};
 document.getElementById('copyLink').onclick=function(){var t=shareUrl();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast('已複製分享連結，貼給朋友就能看')},function(){prompt('複製這個連結分享：',t)})};
 document.getElementById('cal').onclick=function(){var c=compute(),d=state.day.replace(/-/g,''),s=hmToMin(state.dep),f=function(m){return d+'T'+hm(m).replace(':','')+'00'};var u='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('親子出遊：'+state.stops.map(function(x){return SP[x.id].n}).join('、'))+'&dates='+f(s)+'/'+f(c.back)+'&details='+encodeURIComponent(shareText());window.open(u,'_blank','noopener')};
-document.getElementById('copyMine').onclick=function(e){e.preventDefault();readonly=false;history.replaceState(null,'',location.pathname);render();toast('已複製到你的行程，可以開始改了')};
+document.getElementById('copyMine').onclick=function(e){e.preventDefault();readonly=false;var mine=load();if(mine.origin){state.origin=mine.origin;state.geo=mine.geo;oSel.value=mine.origin}history.replaceState(null,'',location.pathname);render();toast('已複製到你的行程，可以開始改了')};
 document.querySelectorAll('.line-join').forEach(function(a){a.onclick=function(e){e.preventDefault();toast('正式版會開 LINE 加入社群；社群公告只放玩學家網站連結')}});
 var shared=fromUrl();if(shared){state=shared;readonly=true}else state=load();
-daySel.value=state.day;depSel.value=state.dep;render();
+oSel.value=state.origin||'';daySel.value=state.day;depSel.value=state.dep;render();
 </script>
 </body></html>
