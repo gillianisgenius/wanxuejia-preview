@@ -1,0 +1,280 @@
+/* 玩學家內頁共用樣式：第一、二層逐字取自參考稿 /activity（2026-10-20 從使用者已登入的 Chrome 取出），第三層是我們多出來的功能 */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 75px; }
+body { margin: 0px; color: rgb(52, 59, 57); background: rgb(243, 244, 243); font-family: "Microsoft JhengHei", Arial, sans-serif; font-size: 15px; line-height: 1.75; }
+a { color: rgb(40, 116, 94); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font: inherit; cursor: pointer; }
+header { background: white; border-bottom: 1px solid rgb(228, 231, 228); }
+.top { max-width: 1180px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: 18px 25px; }
+.logo { display: flex; align-items: center; color: rgb(38, 62, 50); font-weight: 900; font-size: 28px; letter-spacing: 2px; }
+.logo img { width: 54px; height: 54px; object-fit: contain; margin-right: 9px; }
+.logo small { display: block; font-size: 10px; font-weight: 400; letter-spacing: 1px; line-height: 1.4; }
+.mainnav { display: flex; gap: 28px; font-size: 14px; }
+.preview { background: rgb(237, 244, 235); color: rgb(77, 98, 79); font-size: 12px; text-align: center; padding: 6px 15px; }
+.subnav { position: sticky; top: 0px; z-index: 5; background: white; border-bottom: 1px solid rgb(221, 221, 221); display: flex; justify-content: center; gap: 35px; padding: 15px; }
+.subnav a { color: rgb(76, 83, 80); font-size: 14px; }
+.subnav a:hover { color: rgb(38, 113, 83); }
+.wrap { max-width: 1180px; padding: 0px 25px; margin: auto; }
+.crumb { font-size: 12px; padding: 16px 0px; color: rgb(121, 131, 125); }
+.photos { display: grid; grid-template-columns: 2fr 1fr; gap: 5px; height: 330px; }
+.photos img, .photos .ph { height: 100%; width: 100%; object-fit: cover; }
+.photos .small { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; min-height: 0px; }
+.title { background: white; padding: 25px 30px; margin-bottom: 25px; border-bottom: 3px solid rgb(113, 170, 100); }
+.title .type { color: rgb(85, 131, 64); font-size: 12px; font-weight: bold; }
+h1 { font-size: 32px; margin: 5px 0px 10px; letter-spacing: 1px; line-height: 1.4; }
+.subline { display: flex; flex-wrap: wrap; gap: 8px 22px; color: rgb(106, 114, 109); font-size: 13px; }
+.layout { display: grid; grid-template-columns: minmax(0px, 1fr) 310px; gap: 26px; align-items: start; }
+.panel { background: white; padding: 28px 30px; margin-bottom: 22px; border: 1px solid rgb(228, 231, 227); }
+.tools { display: flex; gap: 12px; padding-bottom: 22px; border-bottom: 1px solid rgb(230, 233, 229); }
+.tools button { background: white; border: 1px solid rgb(219, 225, 218); border-radius: 22px; padding: 7px 18px; color: rgb(74, 85, 77); }
+.tools button[aria-pressed="true"] { background: rgb(231, 241, 227); color: rgb(53, 113, 65); }
+h2 { font-size: 23px; margin: 24px 0px 14px; line-height: 1.4; }
+h3 { font-size: 17px; margin: 0px 0px 12px; }
+.intro { font-size: 17px; line-height: 1.9; }
+p { margin: 12px 0px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgb(229, 233, 227); border-bottom: 1px solid rgb(229, 233, 227); padding: 18px 0px; margin-top: 22px; gap: 16px; }
+.facts span { display: block; font-size: 12px; color: rgb(120, 128, 117); }
+.facts strong { font-size: 14px; }
+.note { background: rgb(241, 245, 237); border-left: 3px solid rgb(133, 171, 108); padding: 17px 20px; margin: 22px 0px; display: flex; gap: 16px; }
+.note img { width: 64px; height: 78px; object-fit: contain; mix-blend-mode: multiply; }
+.note p { margin: 0px; font-size: 14px; }
+.byline { color: rgb(120, 128, 117); font-size: 12px; margin-top: 20px; }
+.row { display: grid; grid-template-columns: 110px 1fr; padding: 12px 0px; border-bottom: 1px solid rgb(236, 238, 234); font-size: 14px; }
+.row span:first-child { color: rgb(120, 128, 117); }
+.badge { display: inline-block; background: rgb(255, 241, 214); color: rgb(138, 99, 27); padding: 4px 10px; font-size: 12px; }
+.check { border-left: 3px solid rgb(215, 168, 71); }
+.check small { color: rgb(122, 129, 121); display: block; margin-top: 12px; }
+aside .panel { padding: 23px; }
+aside { position: sticky; top: 78px; }
+.official { display: block; padding: 11px 0px; border-bottom: 1px solid rgb(228, 232, 226); font-size: 14px; }
+.official b { float: right; font-weight: 400; }
+.disabled { color: rgb(146, 154, 146); }
+.button { display: block; text-align: center; background: rgb(57, 123, 89); color: white; padding: 10px; margin-top: 15px; border: 0px; }
+.map { height: 165px; background: rgb(238, 240, 233); display: grid; place-content: center; color: rgb(123, 132, 120); border: 1px solid rgb(221, 226, 216); margin: 17px 0px; font-size: 13px; text-align: center; }
+.faq details { border-bottom: 1px solid rgb(229, 233, 227); padding: 14px 0px; font-size: 14px; }
+.faq summary { cursor: pointer; font-weight: bold; }
+.faq p { color: rgb(104, 114, 104); }
+.related { padding: 20px 0px 40px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.related article { background: white; border: 1px solid rgb(226, 230, 223); }
+.related img, .related .ph { width: 100%; height: 160px; object-fit: cover; }
+.related .text { padding: 14px 18px; }
+.related h3 { margin-bottom: 5px; }
+.related p { font-size: 12px; color: rgb(116, 125, 113); margin: 0px; }
+.bottom { background: white; border-top: 1px solid rgb(221, 226, 217); padding: 35px 0px; font-size: 13px; }
+.footgrid { display: flex; justify-content: space-between; gap: 25px; }
+.footgrid p { max-width: 500px; color: rgb(121, 129, 116); }
+.toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); padding: 12px 20px; background: rgb(40, 77, 57); color: white; z-index: 20; display: none; max-width: 90%; font-size: 14px; }
+.source-label { font-size: 11px; color: rgb(123, 133, 117); margin-top: 5px; }
+.mobile-menu { display: none; }
+ul { padding-left: 22px; }
+li { margin-bottom: 8px; }
+@media (max-width: 760px) {
+  .top { padding: 12px 18px; }
+  .logo { font-size: 25px; }
+  .mainnav { gap: 13px; font-size: 12px; }
+  .mainnav a:last-child { display: none; }
+  .wrap { padding: 0px 16px; }
+  .subnav { justify-content: flex-start; overflow-x: auto; gap: 24px; white-space: nowrap; padding: 12px 18px; }
+  .photos { height: 230px; grid-template-columns: 1.6fr 1fr; }
+  .photos .small { grid-template-columns: 1fr; }
+  .photos .small img:last-child,   .photos .small .ph:last-child { display: none; }
+  .title { padding: 20px; margin-bottom: 18px; }
+  h1 { font-size: 26px; }
+  .layout { display: flex; flex-direction: column; gap: 0px; }
+  .content, aside { width: 100%; }
+  aside { position: static; }
+  .panel { padding: 22px 20px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .intro { font-size: 15px; }
+  .related-grid { grid-template-columns: 1fr; }
+  .related article { display: grid; grid-template-columns: 120px 1fr; }
+  .related img,   .related .ph { height: 125px; }
+  .footgrid { display: block; }
+  .row { grid-template-columns: 90px 1fr; }
+  .tools { gap: 8px; }
+  .tools button { padding: 6px 13px; }
+  h2 { font-size: 21px; }
+}
+/* ---- 第二層：筆記本風（原 assets/notebook.css） ---- */
+body { background: rgb(250, 249, 245); color: rgb(55, 62, 56); }
+header { background: rgb(255, 254, 251); }
+.preview { background: rgb(242, 239, 223); }
+.subnav { background: rgba(255, 254, 251, 0.96); gap: 29px; }
+.wrap { max-width: 1160px; }
+.crumb { padding: 22px 0px 18px; }
+.photos { height: 380px; grid-template-columns: 1.65fr 1fr; gap: 18px; padding-right: 12px; align-items: start; }
+.photos > img, .photos > .ph { height: 345px; border-radius: 2px 2px 35px; }
+.photos .small { height: 355px; grid-template-columns: 1fr 0.8fr; align-items: start; padding-top: 27px; gap: 14px; }
+.photos .small img:first-child, .photos .small .ph:first-child { height: 275px; transform: rotate(-2deg); border: 7px solid white; box-shadow: rgba(45, 60, 53, 0.07) 0px 3px 9px; }
+.photos .small img:last-child, .photos .small .ph:last-child { height: 210px; margin-top: 100px; transform: rotate(3deg); border: 7px solid white; box-shadow: rgba(45, 60, 53, 0.07) 0px 3px 9px; }
+.title { background: none; border: 0px; padding: 5px 8px 28px; margin-bottom: 8px; max-width: 850px; }
+.title .type { display: inline-block; letter-spacing: 1px; border-bottom: 3px solid rgb(214, 230, 184); padding-bottom: 3px; }
+h1 { font-size: 33px; margin: 12px 0px 14px; }
+.layout { grid-template-columns: minmax(0px, 1fr) 290px; gap: 55px; }
+.content > .panel { border: 0px; background: none; padding: 12px 8px 28px; margin-bottom: 20px; }
+.content > .panel h2 { font-size: 24px; margin-bottom: 22px; letter-spacing: 0.5px; }
+.tools { border: 0px; padding: 0px 0px 12px; gap: 18px; }
+.tools button { border: 0px; border-radius: 0px; background: none; padding: 7px 2px; color: rgb(105, 115, 100); }
+.tools button:hover { border-bottom: 1px solid rgb(144, 172, 112); }
+.intro { font-size: 18px; line-height: 2; max-width: 640px; }
+.content p { line-height: 1.95; }
+.facts { background: rgb(240, 241, 232); border: 0px; padding: 22px 24px; grid-template-columns: repeat(3, 1fr); margin: 30px 0px 35px; gap: 24px; }
+.facts strong { font-weight: 500; }
+.note { position: relative; background: rgb(245, 236, 205); border: 0px; padding: 25px 25px 23px; transform: rotate(-0.8deg); margin: 30px 8px 24px 28px; box-shadow: rgba(217, 207, 172, 0.22) 2px 4px 0px; gap: 19px; }
+.note::before { content: ""; position: absolute; top: -10px; left: 44%; width: 70px; height: 22px; background: rgba(213, 223, 186, 0.6); transform: rotate(5deg); }
+.note img { width: 86px; height: 106px; margin-top: -14px; }
+.note h3 { font-size: 16px; }
+.byline { padding-top: 10px; }
+.row { grid-template-columns: 115px 1fr; border-color: rgb(228, 230, 218); }
+.content #info { padding-bottom: 20px; }
+.content #cost { max-width: 570px; margin: 5px 0px 32px; padding: 22px 25px; background: white; border-top: 2px solid rgb(166, 187, 140); border-bottom: 1px solid rgb(226, 230, 217); }
+.content #check { background: rgb(241, 238, 229); border-width: 0px 0px 0px 3px; border-style: none none none solid; border-color: currentcolor currentcolor currentcolor rgb(210, 174, 88); border-image: none; padding: 22px 25px; margin-left: 18px; }
+.badge { background: rgb(248, 232, 187); }
+.content #faq { padding-top: 20px; }
+.faq details { border-bottom: 1px dashed rgb(214, 221, 205); }
+.faq summary { font-weight: 500; }
+aside { padding-top: 34px; }
+aside .panel { background: rgb(255, 254, 251); border-width: 1px 0px 0px; border-style: solid none none; border-color: rgb(207, 217, 199) currentcolor currentcolor; border-image: none; padding: 23px 20px; margin-bottom: 31px; }
+aside .panel:first-child { border-top: 3px solid rgb(150, 183, 121); }
+.official { border-color: rgb(236, 239, 231); }
+.map { background: rgb(237, 240, 231); }
+.button { background: rgb(71, 123, 85); }
+.related { border-top: 1px solid rgb(220, 226, 212); margin-top: 12px; padding-top: 32px; }
+.related-grid { gap: 32px; align-items: start; }
+.related article { border: 0px; background: none; }
+.related article:nth-child(2) { margin-top: 26px; }
+.related article:nth-child(3) { margin-top: 8px; }
+.related img, .related .ph { height: 180px; border-radius: 2px; }
+.related article:nth-child(2) img, .related article:nth-child(2) .ph { height: 205px; }
+.related .text { padding: 13px 2px; }
+.related h3 { font-size: 17px; }
+.bottom { background: rgb(241, 242, 233); }
+.title::after { content: "照片為風格示意 · 每次出發，都可以有不同的小發現。"; display: block; font-size: 11px; color: rgb(138, 143, 129); margin-top: 15px; }
+@media (max-width: 760px) {
+  .photos { height: 290px; grid-template-columns: 1.5fr 1fr; gap: 12px; padding-right: 0px; }
+  .photos > img,   .photos > .ph { height: 250px; border-radius: 2px 2px 24px; }
+  .photos .small { padding-top: 25px; height: 260px; grid-template-columns: 1fr; }
+  .photos .small img:first-child,   .photos .small .ph:first-child { height: 200px; border-width: 5px; }
+  .photos .small img:last-child,   .photos .small .ph:last-child { display: none; }
+  .title { padding: 0px 3px 20px; }
+  h1 { font-size: 26px; }
+  .layout { gap: 0px; }
+  .content > .panel { padding: 10px 3px 25px; }
+  .intro { font-size: 16px; }
+  .facts { grid-template-columns: repeat(2, 1fr); padding: 18px; gap: 18px; }
+  .note { margin-left: 8px; margin-right: 3px; padding: 22px 17px; gap: 12px; }
+  .note img { width: 65px; height: 82px; }
+  .content #check { margin-left: 0px; padding: 20px; }
+  .content #cost { padding: 20px; }
+  aside { padding-top: 0px; }
+  .related-grid { gap: 24px; }
+  .related article:nth-child(n) { margin-top: 0px; }
+  .related article:nth-child(n) img,   .related article:nth-child(n) .ph { height: 125px; }
+  .related .text { padding: 8px 0px 8px 15px; }
+}
+
+/* ---- 第三層：玩學家多出來的功能，沿用上面同一套顏色、線條和間距 ---- */
+.switcher { background: rgb(38, 62, 50); color: rgb(250, 249, 245); font-size: 13px; padding: 7px 16px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.switcher a { color: rgb(250, 249, 245); }
+.switcher a[aria-current="page"] { text-decoration: underline; }
+.mainnav a[aria-current="page"] { font-weight: 700; }
+.ph { background: rgb(230, 232, 221); color: rgb(123, 132, 120); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 13px; padding: 12px; }
+.subline .ok { color: rgb(53, 113, 65); }
+.subline .warn { color: rgb(138, 99, 27); }
+
+/* 天氣：跟「行程小卡」同一個淺綠底 */
+.wx { display: grid; grid-template-columns: repeat(2, 1fr) 1.2fr; gap: 24px; background: rgb(240, 241, 232); padding: 20px 24px; margin: 10px 0px 6px; }
+.wx span { display: block; font-size: 12px; color: rgb(120, 128, 117); }
+.wx strong { font-weight: 500; font-size: 14px; }
+.wx .rain strong { color: rgb(138, 99, 27); }
+.wx small { font-size: 12px; color: rgb(120, 128, 117); align-self: center; }
+
+/* 附近順遊：跟側欄「官方網站」那種一行一筆 */
+.near { max-width: 640px; }
+.near a { display: grid; grid-template-columns: 1fr auto; gap: 15px; padding: 12px 0px; border-bottom: 1px dashed rgb(214, 221, 205); color: rgb(55, 62, 56); font-size: 14px; }
+.near a b { font-weight: 500; font-size: 15px; }
+.near a small { display: block; color: rgb(120, 128, 117); font-size: 12px; }
+.near a em { font-style: normal; color: rgb(100, 130, 74); font-size: 13px; align-self: center; }
+.near a:hover { text-decoration: none; }
+.near a:hover b { color: rgb(40, 116, 94); }
+
+/* 路線時間表：左邊時間標籤沿用首頁 list-row 的小綠塊 */
+.plan { max-width: 640px; }
+.step { display: grid; grid-template-columns: 70px 1fr; gap: 18px; padding: 14px 0px; border-bottom: 1px dashed rgb(214, 221, 205); }
+.step .t { color: rgb(100, 130, 74); background: rgb(238, 241, 229); text-align: center; font-size: 13px; padding: 6px; height: 35px; }
+.step.lunch .t { background: rgb(248, 232, 187); color: rgb(138, 99, 27); }
+.step h3 { font-size: 16px; margin: 0px 0px 3px; }
+.step p { margin: 0px; font-size: 14px; color: rgb(104, 114, 104); }
+.drive { padding: 6px 0px 6px 88px; font-size: 12px; color: rgb(138, 143, 129); }
+.dep { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgb(105, 115, 100); margin-bottom: 8px; }
+.dep select { font: inherit; border: 0px; border-bottom: 1px solid rgb(144, 172, 112); background: none; padding: 3px 2px; }
+.two { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; background: rgb(240, 241, 232); padding: 22px 24px; max-width: 640px; }
+.two span { display: block; font-size: 12px; color: rgb(120, 128, 117); }
+
+/* 營隊：「我家能不能報」放在跟費用一樣的白卡 */
+.who { max-width: 570px; padding: 22px 25px; background: white; border-top: 2px solid rgb(166, 187, 140); border-bottom: 1px solid rgb(226, 230, 217); }
+.who label { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; font-size: 14px; color: rgb(105, 115, 100); margin-bottom: 10px; }
+.who select { font: inherit; border: 0px; border-bottom: 1px solid rgb(144, 172, 112); background: none; padding: 4px 2px; color: rgb(55, 62, 56); }
+.who .res div { padding: 8px 12px; margin: 8px 0px; font-size: 14px; }
+.who .yes { background: rgb(231, 241, 227); color: rgb(53, 113, 65); }
+.who .no { background: rgb(241, 238, 229); color: rgb(122, 92, 40); }
+.who small { display: block; color: rgb(122, 129, 121); font-size: 12px; margin-top: 10px; }
+.tl { border-left: 2px solid rgb(214, 230, 184); margin-left: 6px; padding-left: 22px; max-width: 600px; }
+.tl div { position: relative; padding: 4px 0px 16px; font-size: 14px; }
+.tl div::before { content: ""; position: absolute; left: -29px; top: 10px; width: 12px; height: 12px; border-radius: 50%; background: rgb(250, 249, 245); border: 2px solid rgb(150, 183, 121); }
+.tl div.now::before { background: rgb(71, 123, 85); border-color: rgb(71, 123, 85); }
+.tl b { display: block; font-weight: 500; font-size: 15px; }
+.tl span { color: rgb(104, 114, 104); }
+.ask { max-width: 640px; }
+.ask div { padding: 11px 0px; border-bottom: 1px dashed rgb(214, 221, 205); font-size: 14px; }
+
+/* 這週末去哪：篩選沿用 .tools 文字按鈕，卡片沿用首頁 .cards */
+.filters { padding: 6px 8px 18px; }
+.fg { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; padding: 6px 0px; font-size: 14px; }
+.fg .lab { width: 52px; font-size: 12px; color: rgb(120, 128, 117); }
+.fg button { border: 0px; background: none; padding: 5px 2px; color: rgb(105, 115, 100); border-bottom: 1px solid transparent; }
+.fg button:hover { border-bottom-color: rgb(144, 172, 112); }
+.fg button[aria-pressed="true"] { color: rgb(40, 116, 94); border-bottom: 2px solid rgb(40, 116, 94); }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
+.card { position: relative; color: rgb(55, 62, 56); }
+.card:nth-child(2) { margin-top: 26px; }
+.card:nth-child(3) { margin-top: 8px; }
+.card .ph { width: 100%; height: 200px; border-radius: 2px; }
+.card:first-child .ph { border-radius: 2px 2px 35px; }
+.card .tag { font-size: 11px; color: rgb(123, 144, 95); margin-top: 12px; letter-spacing: 1px; }
+.card h3 { font-size: 19px; line-height: 1.6; margin: 6px 0px 5px; }
+.card p { font-size: 14px; color: rgb(104, 114, 104); margin: 0px 0px 8px; }
+.card .meta { font-size: 12px; color: rgb(126, 135, 118); line-height: 1.9; }
+.card .meta .rain { color: rgb(138, 99, 27); }
+.card:hover { text-decoration: none; }
+.card:hover h3 { color: rgb(71, 123, 85); }
+.list-row { display: grid; grid-template-columns: 70px 1fr auto; gap: 15px; padding: 13px 0px; border-bottom: 1px dashed rgb(214, 221, 204); color: rgb(55, 62, 56); }
+.list-row .label { color: rgb(100, 130, 74); background: rgb(238, 241, 229); text-align: center; font-size: 12px; padding: 6px; height: 35px; }
+.list-row h3 { font-size: 15px; margin: 0px 0px 3px; }
+.list-row small { font-size: 12px; color: rgb(130, 137, 117); }
+.list-row em { font-style: normal; font-size: 13px; align-self: center; color: rgb(40, 116, 94); }
+.list-row:hover { text-decoration: none; }
+.week-head { display: grid; grid-template-columns: 1fr 360px; gap: 55px; align-items: end; padding: 10px 8px 22px; }
+.week-head .wx { grid-template-columns: repeat(2, 1fr); margin: 0px; }
+.cols { display: grid; grid-template-columns: minmax(0px, 1fr) 290px; gap: 55px; align-items: start; }
+
+@media (max-width: 760px) {
+  .wx { grid-template-columns: repeat(2, 1fr); padding: 18px; gap: 16px; }
+  .wx small { grid-column: 1 / -1; }
+  .two { grid-template-columns: 1fr; gap: 12px; padding: 18px; }
+  .who label { grid-template-columns: 1fr; gap: 2px; }
+  .who { padding: 20px; }
+  .cards { grid-template-columns: 1fr; gap: 24px; }
+  .card:nth-child(n) { margin-top: 0px; }
+  .card .ph { height: 180px; }
+  .week-head, .cols { grid-template-columns: 1fr; gap: 18px; }
+  .fg .lab { width: 100%; }
+  .drive { padding-left: 88px; }
+}
+
+/* LINE 社群入口：沿用側欄 .button 的綠 */
+.line-join { display: inline-block; background: rgb(71, 123, 85); color: white; padding: 8px 18px; font-size: 13px; margin-top: 4px; border: 0px; }
+.line-join:hover { text-decoration: none; background: rgb(57, 105, 72); }
+.line-panel p { font-size: 13px; }

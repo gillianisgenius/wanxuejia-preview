@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>玩學家｜親子活動・課程・出遊情報</title>
+<style>
+/* 逐字取自參考稿首頁（2026-10-20 從使用者已登入的 Chrome 取出）；只多了 .ph 照片色塊與樣張切換列 */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0px; background: rgb(250, 249, 245); color: rgb(55, 62, 56); font-family: "Microsoft JhengHei", Arial, sans-serif; line-height: 1.7; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+header { background: rgb(255, 254, 251); border-bottom: 1px solid rgb(228, 231, 223); }
+.wrap { max-width: 1160px; padding: 0px 25px; margin: auto; }
+.top { display: flex; align-items: center; justify-content: space-between; padding: 17px 0px; }
+.logo { display: flex; align-items: center; font-size: 28px; font-weight: 900; letter-spacing: 2px; color: rgb(38, 62, 50); }
+.logo img { width: 54px; height: 54px; margin-right: 9px; }
+.logo small { display: block; font-size: 10px; font-weight: 400; letter-spacing: 1px; }
+.nav { display: flex; gap: 28px; font-size: 14px; }
+.demo { font-size: 12px; text-align: center; padding: 5px; background: rgb(242, 239, 223); color: rgb(104, 115, 84); }
+.welcome { display: grid; grid-template-columns: 1.2fr 1fr; gap: 55px; padding: 40px 0px 32px; align-items: center; }
+.kicker { font-size: 12px; color: rgb(114, 140, 88); letter-spacing: 2px; }
+h1 { font-size: 36px; line-height: 1.5; margin: 10px 0px 14px; letter-spacing: 1px; }
+p { color: rgb(117, 128, 111); font-size: 14px; line-height: 1.9; }
+.search { display: flex; gap: 8px; background: white; border: 1px solid rgb(214, 223, 204); padding: 8px; margin-top: 20px; }
+.search input { border: 0px; min-width: 0px; flex: 1 1 0%; padding: 8px; background: none; outline-offset: 3px; }
+.search select { border-width: 0px 0px 0px 1px; border-style: none none none solid; border-color: currentcolor currentcolor currentcolor rgb(227, 230, 223); border-image: none; background: none; width: 92px; }
+.search button { border: 0px; background: rgb(71, 123, 85); color: white; padding: 9px 17px; }
+.quick { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; margin-top: 13px; color: rgb(108, 124, 96); }
+.quick button { border: 0px; background: none; color: inherit; padding: 0px; }
+.collage { position: relative; height: 290px; }
+.collage .big { position: absolute; left: 0px; top: 0px; width: 72%; height: 250px; object-fit: cover; border: 7px solid white; transform: rotate(-2deg); box-shadow: rgba(56, 78, 53, 0.063) 0px 4px 10px; }
+.collage .little { position: absolute; right: 0px; bottom: 0px; width: 43%; height: 155px; object-fit: cover; border: 7px solid white; transform: rotate(4deg); }
+.collage .caption { position: absolute; right: 0px; top: 12px; font-size: 11px; writing-mode: vertical-rl; color: rgb(125, 133, 110); letter-spacing: 2px; }
+.week { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgb(220, 227, 211); border-bottom: 1px solid rgb(220, 227, 211); padding: 15px 0px; font-size: 13px; gap: 15px; }
+.week strong { color: rgb(74, 117, 64); }
+.week a { color: rgb(114, 128, 95); }
+.section-head { display: flex; justify-content: space-between; align-items: end; margin: 35px 0px 20px; }
+.section-head h2 { font-size: 25px; margin: 0px; }
+.section-head p { margin: 3px 0px 0px; font-size: 12px; }
+.section-head a { font-size: 12px; color: rgb(110, 132, 92); }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.card { position: relative; }
+.card:nth-child(2n) { padding-top: 16px; }
+.card img, .card .ph { width: 100%; height: 180px; object-fit: cover; border-radius: 2px; }
+.card h3 { font-size: 17px; line-height: 1.65; margin: 9px 0px 5px; font-weight: 600; }
+.card .tag { font-size: 11px; color: rgb(123, 144, 95); margin-top: 12px; }
+.card .meta { font-size: 12px; color: rgb(126, 135, 118); line-height: 1.9; }
+.card .heart { position: absolute; right: 10px; top: 10px; width: 30px; height: 30px; background: rgb(255, 254, 251); border: 0px; border-radius: 50%; color: rgb(90, 120, 80); }
+.card:nth-child(2n) .heart { top: 26px; }
+.card a:hover h3 { color: rgb(71, 123, 85); }
+.empty { display: none; color: rgb(123, 132, 111); padding: 25px; }
+.middle { display: grid; grid-template-columns: 1.7fr 1fr; gap: 45px; margin: 42px 0px 30px; }
+.topics { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.topics button { border: 1px solid rgb(220, 227, 208); background: rgb(255, 254, 251); padding: 9px 15px; color: rgb(92, 110, 80); }
+.sticky-note { position: relative; background: rgb(245, 236, 205); padding: 23px; transform: rotate(-1deg); display: flex; gap: 12px; align-items: center; margin: 10px 0px; }
+.sticky-note::before { content: ""; position: absolute; top: -9px; left: 40%; height: 19px; width: 62px; background: rgba(213, 223, 186, 0.6); transform: rotate(5deg); }
+.sticky-note img { width: 80px; mix-blend-mode: multiply; }
+.sticky-note h3 { font-size: 16px; margin: 0px; }
+.sticky-note p { font-size: 13px; margin: 6px 0px 0px; }
+.learning { border-top: 1px solid rgb(220, 227, 211); padding-top: 2px; }
+.learning-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 35px; }
+.story { display: grid; grid-template-columns: 160px 1fr; gap: 20px; align-items: center; }
+.story img, .story .ph { width: 160px; height: 185px; object-fit: cover; }
+.story h3 { font-size: 21px; line-height: 1.6; margin: 5px 0px; }
+.story p { font-size: 13px; margin: 8px 0px; }
+.list-row { display: grid; grid-template-columns: 70px 1fr; gap: 15px; padding: 13px 0px; border-bottom: 1px dashed rgb(214, 221, 204); }
+.list-row .label { color: rgb(100, 130, 74); background: rgb(238, 241, 229); text-align: center; font-size: 12px; padding: 6px; height: 35px; }
+.list-row h3 { font-size: 15px; margin: 0px 0px 5px; }
+.list-row small { font-size: 12px; color: rgb(130, 137, 117); }
+.locations { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; padding: 30px 0px; margin-top: 36px; border-top: 1px solid rgb(220, 227, 211); }
+.locations h2 { font-size: 22px; margin: 0px; }
+.cities { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+.cities button { border-width: 0px 0px 1px; border-style: none none solid; border-color: currentcolor currentcolor rgb(197, 210, 182); border-image: none; background: none; color: rgb(94, 112, 82); font-size: 15px; padding: 5px 1px; }
+.newsletter { display: flex; justify-content: space-between; align-items: center; padding: 28px; margin: 12px 0px 40px; background: rgb(238, 241, 231); gap: 25px; }
+.newsletter h3 { font-size: 19px; margin: 0px; }
+.newsletter p { font-size: 12px; margin: 4px 0px; }
+.newsletter a { font-size: 13px; border-bottom: 1px solid rgb(118, 148, 99); padding: 5px; }
+.footer { background: rgb(241, 242, 233); border-top: 1px solid rgb(221, 227, 212); padding: 27px 0px; font-size: 12px; color: rgb(124, 133, 113); }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgb(52, 91, 62); color: white; padding: 12px 20px; display: none; z-index: 10; font-size: 13px; max-width: 90%; }
+@media (max-width: 760px) {
+  .wrap { padding: 0px 18px; }
+  .top { padding: 12px 0px; }
+  .logo { font-size: 24px; }
+  .nav { gap: 13px; font-size: 12px; }
+  .nav a:last-child { display: none; }
+  .welcome { grid-template-columns: 1fr; gap: 25px; padding-top: 25px; }
+  h1 { font-size: 29px; }
+  .collage { height: 215px; }
+  .collage .big { height: 190px; width: 76%; }
+  .collage .little { height: 125px; width: 39%; }
+  .week { align-items: start; font-size: 12px; }
+  .week a { white-space: nowrap; }
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 22px 15px; }
+  .card img, .card .ph { height: 150px; }
+  .card h3 { font-size: 15px; }
+  .card:nth-child(2n) { padding-top: 10px; }
+  .card:nth-child(2n) .heart { top: 20px; }
+  .middle { grid-template-columns: 1fr; gap: 18px; margin-top: 30px; }
+  .section-head h2 { font-size: 22px; }
+  .learning-grid { grid-template-columns: 1fr; gap: 15px; }
+  .story { grid-template-columns: 125px 1fr; gap: 15px; }
+  .story img, .story .ph { width: 125px; height: 165px; }
+  .story h3 { font-size: 18px; }
+  .locations { grid-template-columns: 1fr; gap: 12px; }
+  .newsletter { padding: 20px; display: block; }
+  .newsletter a { display: inline-block; margin-top: 9px; }
+  .search button { padding: 8px 12px; }
+  .search select { width: 75px; }
+  .search input { font-size: 13px; }
+}
+/* 樣張多加的 */
+.line-join { display: inline-block; background: rgb(71, 123, 85); color: white; padding: 8px 18px; font-size: 13px; margin-top: 8px; }
+.newsletter .links { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; }
+.newsletter .line-join { border: 0px; color: white; padding: 8px 18px; }
+.ph { background: rgb(230, 232, 221); color: rgb(123, 132, 120); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 12px; padding: 10px; }
+.switcher { background: rgb(38, 62, 50); color: rgb(250, 249, 245); font-size: 13px; padding: 7px 16px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.switcher a[aria-current="page"] { text-decoration: underline; }
+.list-row .when { display: block; font-size: 12px; color: rgb(40, 116, 94); }
+</style></head><body>
+<nav class="switcher" aria-label="樣張切換"><span>樣張：</span><a href="index.html" aria-current="page">首頁</a><a href="weekend.html">這週末去哪</a><a href="route.html">路線</a><a href="place.html">地點</a><a href="camp.html">營隊</a><a href="sitemap.html">頁面地圖</a></nav>
+<header><div class="wrap top"><a class="logo" href="index.html"><img src="assets/frog.webp" alt="玩學家青蛙"><span>玩學家<small>親子活動・課程・出遊情報</small></span></a><nav class="nav"><a href="camp.html">開報雷達</a><a href="weekend.html">這週末去哪</a><a href="place.html">玩樂地圖</a><a href="#">我的行程</a></nav></div></header>
+<div class="demo">首頁版型樣張 · 照片位置之後換成自家拍攝；天氣數字為示意</div>
+<main class="wrap">
+<section class="welcome"><div><div class="kicker">第 42 週 · 10 月 24–25 日</div><h1>這個週末，<br>孩子想去哪裡玩？</h1><p>週六北部可能下雨，這週推薦以室內為主。<br>從地點和興趣開始，安排你們喜歡的一天。</p>
+<form class="search" onsubmit="return false"><input id="q" aria-label="搜尋活動" placeholder="試試：海洋、陶藝、科學"><select id="area" aria-label="地區"><option value="">全地區</option><option>台北</option><option>新北</option><option>基隆</option><option>桃園</option></select><button>搜尋</button></form>
+<div class="quick"><span>快速找：</span><button data-q="室內">雨天室內</button><button data-q="自然">自然探索</button><button data-q="創作">動手創作</button><button data-q="">全部</button></div></div>
+<div class="collage"><div class="ph big">本週封面：潮境公園草坡（自家拍攝）</div><div class="ph little">海科館兒童廳</div><span class="caption">出去看看，也動手試試。</span></div></section>
+<div class="week"><span><strong>這週末天氣</strong>　週六 台北陰短暫雨、降雨 70%；週日多雲 22–28°。</span><a href="weekend.html">看這週末推薦 ↗</a></div>
+<section id="activities"><div class="section-head"><div><h2>這週末去哪</h2><p>看了天氣、公休日和車程才推薦。</p></div><a href="weekend.html">看全部路線 ↗</a></div>
+<div class="cards">
+<article class="card" data-area="基隆" data-key="海洋 室內 自然"><button class="heart" aria-label="收藏海科館" aria-pressed="false">♡</button><a href="route.html"><div class="ph">海科館照片</div><div class="tag">雨天首選 ／ 室內</div><h3>海科館＋潮境公園</h3></a><div class="meta">基隆 · 開車 45 分<br>週六降雨 70% 也能走</div></article>
+<article class="card" data-area="台北" data-key="天文 科學 室內"><button class="heart" aria-label="收藏天文館" aria-pressed="false">♡</button><a href="#"><div class="ph">天文館照片</div><div class="tag">離家最近 ／ 室內</div><h3>天文館＋士林官邸</h3></a><div class="meta">台北 · 開車 10 分<br>天文館週一休</div></article>
+<article class="card" data-area="新北" data-key="陶藝 創作 室內 DIY"><button class="heart" aria-label="收藏陶博館" aria-pressed="false">♡</button><a href="#"><div class="ph">陶博館照片</div><div class="tag">動手創作 ／ 室內</div><h3>鶯歌陶博館＋捏陶</h3></a><div class="meta">新北 · 開車 45 分<br>每月第一個週一休</div></article>
+<article class="card" data-area="台北" data-key="自然 戶外 賞鳥"><button class="heart" aria-label="收藏關渡" aria-pressed="false">♡</button><a href="#"><div class="ph">關渡照片</div><div class="tag">自然探索 ／ 戶外</div><h3>關渡賞鳥＋淡水夕陽</h3></a><div class="meta">台北 · 開車 30 分<br>週日天晴再去</div></article>
+</div><div class="empty">目前沒有符合條件的路線。試試其他地區或關鍵字。</div></section>
+<div class="middle"><section><h2 style="font-size:22px;margin:0">從孩子的興趣找起</h2><div class="topics"><button data-q="自然">自然與動物</button><button data-q="創作">美術與創作</button><button data-q="科學">科學小實驗</button><button data-q="戶外">戶外走走</button><button data-q="室內">雨天室內</button><button data-q="">全部活動</button></div></section>
+<div class="sticky-note"><img src="assets/frog.webp" alt="青蛙小提醒"><div><h3>不用一次排滿整天</h3><p>一個孩子想試的體驗，加上一頓飯和一段散步，就能有自己的小旅行。</p></div></div></div>
+<section class="learning" id="learning"><div class="section-head"><div><h2>開報雷達</h2><p>只列你家孩子能報的營隊，開報前提醒你。</p></div><a href="camp.html">看全部營隊 ↗</a></div>
+<div class="learning-grid"><a class="story" href="camp.html"><div class="ph">營隊插圖</div><div><div class="kicker">今天開報</div><h3>寒假森林小學冬令營，<br>10/20 09:00 開放報名</h3><p>人本教育基金會・新北汐止・五天四夜・國小一到六年級・11,400 元。</p><small style="color:#88907b">看我家能不能報 ↗</small></div></a>
+<div><a class="list-row" href="#"><span class="label">10/30</span><div><h3>魔法科學班冬令營早鳥截止</h3><small>一到四年級 · 大安、板橋</small></div></a><a class="list-row" href="#"><span class="label">1/25</span><div><h3>文大推廣部寒假兒童營</h3><small>已公告 · 台北大安 · 半日</small></div></a><a class="list-row" href="#"><span class="label">比賽</span><div><h3>兒童路跑報名前，確認距離與陪跑規則</h3><small>出遊筆記 · 標示適合年齡</small></div></a></div></div></section>
+<section class="locations" id="locations"><div><h2>從離家近的地方開始</h2><p>第一階段以雙北、基隆與桃園為主。</p></div><div class="cities"><button data-area="台北">台北</button><button data-area="新北">新北</button><button data-area="基隆">基隆</button><button data-area="桃園">桃園</button><button data-area="">全部地區</button></div></section>
+<section class="newsletter"><div><h3>每週情報寄信箱，當天消息看 LINE 社群</h3><p>每週一封：這週末去哪、接下來兩週可以報的營隊。可以選孩子年級和縣市。</p></div><div class="links"><a href="#" id="sub">訂閱每週親子情報 ↗</a><a class="line-join" href="#">加入 LINE 社群</a></div></section>
+</main>
+<footer class="footer"><div class="wrap">玩學家 · 親子活動、兒童課程與出遊情報<br>本站部分連結為聯盟連結，透過連結購買，本站可能獲得分潤，不影響你的價格。活動日期與價格以主辦單位公告為準。<br><a href="sitemap.html">頁面地圖</a><br><a class="line-join" href="#">加入玩學家 LINE 社群</a></div></footer>
+<div class="toast" role="status"></div>
+<script>
+function toast(t){var e=document.querySelector('.toast');e.textContent=t;e.style.display='block';setTimeout(function(){e.style.display='none'},3000)}
+function filter(q,area){var n=0;document.querySelectorAll('.card').forEach(function(c){var ok=(!q||c.dataset.key.indexOf(q)>=0||c.textContent.indexOf(q)>=0)&&(!area||c.dataset.area===area);c.style.display=ok?'':'none';if(ok)n++});document.querySelector('.empty').style.display=n?'none':'block'}
+document.querySelector('.search').addEventListener('submit',function(){filter(document.getElementById('q').value.trim(),document.getElementById('area').value);document.getElementById('activities').scrollIntoView()});
+document.querySelectorAll('[data-q]').forEach(function(b){b.onclick=function(){document.getElementById('q').value=b.dataset.q;filter(b.dataset.q,document.getElementById('area').value);document.getElementById('activities').scrollIntoView()}});
+document.querySelectorAll('.cities button').forEach(function(b){b.onclick=function(){document.getElementById('area').value=b.dataset.area;filter(document.getElementById('q').value.trim(),b.dataset.area);document.getElementById('activities').scrollIntoView()}});
+document.querySelectorAll('.heart').forEach(function(h){h.onclick=function(){var on=h.getAttribute('aria-pressed')!=='true';h.setAttribute('aria-pressed',on);h.textContent=on?'♥':'♡';toast(on?'已收藏到「我的行程」（樣張不會真的存）':'已取消收藏')}});
+document.getElementById('sub').onclick=function(e){e.preventDefault();toast('電子報規劃中，樣張不收集電子郵件')};
+document.querySelectorAll('.line-join').forEach(function(a){a.onclick=function(e){e.preventDefault();toast('正式版會開 LINE 加入社群；社群公告只放玩學家網站連結')}});
+</script>
+</body></html>
